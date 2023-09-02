@@ -1,4 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+// import {} from 'next-auth'
 import { Session } from "inspector";
 import NextAuth, {
   NextAuthOptions,
@@ -33,14 +34,18 @@ declare module "next-auth/jwt" {
   }
 }
 export const authOptions: NextAuthOptions = {
+
+
+ 
   session: {
     strategy: "jwt",
   },
   secret: process.env.SECRET,
   adapter: PrismaAdapter(prisma),
   callbacks: {
+    
     jwt: async ({ token }: any) => {
-      // console.log('the jwt is here: ' , token)
+    //   console.log('the jwt is here: ' , token)
       const db_user = await prisma.user.findFirst({
         where: {
           email: token?.email,
@@ -64,6 +69,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   providers: [
+    
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,

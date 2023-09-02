@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
 import * as React from "react";
-import { SunMoon } from "lucide-react";
+// import { SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
 
 
@@ -11,7 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "../src/components/ui/dropdown-menu";
 // import {DropDownMenu} from './'
 export function ThemeToggle({
   className,
