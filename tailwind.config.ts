@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-
+const {nextui} = require("@nextui-org/react");
 const config: Config = {
   content: [
     "./node_modules/flowbite-react/**/*.js",
@@ -17,6 +17,7 @@ const config: Config = {
     },
   },
   plugins: [
+    nextui(),
     require("flowbite/plugin")
   ],
 }
