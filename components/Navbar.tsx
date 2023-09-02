@@ -10,6 +10,7 @@ import { ThemeToggle } from "./ThemeProvider";
 import { getAuthSession } from "../lib/nextauth";
 import SignInButton from "./SignInButton";
 import { useUser } from "@clerk/nextjs";
+import { NavbarMenus } from "./NavMenu";
 
 const Navbar = () => {
     
@@ -25,6 +26,7 @@ const Navbar = () => {
             AfriFarms
           </p>
         </Link>
+        <NavbarMenus />
         <div className="flex items-center">
           <ThemeToggle className="mr-4" />
           {user ? (

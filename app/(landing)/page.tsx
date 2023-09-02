@@ -6,6 +6,7 @@ import { Button } from '../../components/ui/button'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import { HeroSection } from '@/components/hero'
+import Featured from '@/components/Featured'
 
 
 const apiKey = process.env.GOOGLE_CLIENT_ID
@@ -16,10 +17,12 @@ export default function Home() {
   return (
   
     
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className=" min-h-screen  grid place-items-center space-y-10 md:space-y-20 p-16">
     
        {/* hellow */}
        <HeroSection />
+
+       <Featured />
       
     </main>
   )
