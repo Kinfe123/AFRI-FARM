@@ -35,7 +35,7 @@ export const HeroSection = () => {
               </svg> */}
 
               <h2 className=" items-center justify-center font-heading text-lg leading-[1.1] md:text-xl  ">
-                Proudly Made For African
+                Let's OpenSource Education 
               </h2>
             </div>
           </Link>

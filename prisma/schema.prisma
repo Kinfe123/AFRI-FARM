@@ -66,3 +66,49 @@ model VerificationRequest {
 
   @@map(name: "verification_requests")
 }
+
+
+model Course {
+  id    String @id @default(cuid())
+  name  String
+  image String
+  units Unit[]
+}
+
+// unit contains many chapters
+model Unit {
+  id       String @id @default(cuid())
+  courseId String
+
+  name     String
+  course   Course    @relation(fields: [courseId], references: [id])
+  chapters Chapter[]
+
+  @@index([courseId], name: "courseId")
+}
+
+model Chapter {
+  id     String @id @default(cuid())
+  unitId String
+
+  name               String
+  youtubeSearchQuery String
+  videoId            String?
+  summary            String?    @db.VarChar(3000)
+  unit               Unit       @relation(fields: [unitId], references: [id])
+  questions          Question[]
+
+  @@index([unitId], name: "unitId")
+}
+
+model Question {
+  id        String @id @default(cuid())
+  chapterId String
+
+  question String  @db.VarChar(3000)
+  answer   String  @db.VarChar(3000)
+  options  String  @db.VarChar(3000)
+  chapter  Chapter @relation(fields: [chapterId], references: [id])
+
+  @@index([chapterId], name: "chapterId")
+}

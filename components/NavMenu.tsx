@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
+import * as React from "react";
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 // import { Icons } from "@/components/icons"
 import {
   NavigationMenu,
@@ -13,45 +13,46 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Alert Dialog",
+    title: "Technology Integration",
     href: "/docs/primitives/alert-dialog",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      " Enhancing Education Through Technology Integration",
   },
   {
-    title: "Hover Card",
+    title: "Personalized Learning:",
     href: "/docs/primitives/hover-card",
     description:
-      "For sighted users to preview content available behind a link.",
+      "Empowering Learners Through Personalized Learning",
   },
   {
-    title: "Progress",
+    title: "Online Collaboration ",
     href: "/docs/primitives/progress",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "Facilitating Online Collaboration for Effective Learning.",
   },
   {
-    title: "Scroll-area",
+    title: "Gamification in Education",
     href: "/docs/primitives/scroll-area",
     description: "Visually or semantically separates content.",
   },
   {
-    title: "Tabs",
+    title: "Open Educational Resources",
     href: "/docs/primitives/tabs",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "Unlocking Learning Opportunities with Open Educational Resources.",
   },
   {
-    title: "Tooltip",
+    title: "Smarrt Check ",
     href: "/docs/primitives/tooltip",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "Title: Maximizing Learning Outcomes with Blended Learning Approaches"
+      
   },
-]
+];
 
 export function NavbarMenus() {
   return (
@@ -72,19 +73,20 @@ export function NavbarMenus() {
                       Beautifully Farmed
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                    Cultivating a deep connection with knowledge, embarking on a quest for wisdom
+                      Cultivating a deep connection with knowledge, embarking on
+                      a quest for wisdom
                     </p>
                   </a>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/docs" title="Introduction">
-              Cultivating a deep connection with knowledge  
+                How to create a docs/courses
               </ListItem>
               <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
+                How to effectively guidling your docs / courses
               </ListItem>
               <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
+                How to collab with others
               </ListItem>
             </ul>
           </NavigationMenuContent>
@@ -114,7 +116,7 @@ export function NavbarMenus() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
 
 const ListItem = React.forwardRef<
@@ -139,6 +141,6 @@ const ListItem = React.forwardRef<
         </a>
       </NavigationMenuLink>
     </li>
-  )
-})
-ListItem.displayName = "ListItem"
+  );
+});
+ListItem.displayName = "ListItem";

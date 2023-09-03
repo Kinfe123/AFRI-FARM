@@ -20,12 +20,10 @@ const Featured = () => {
               Tutorial
             </a>
             <h1 className="text-gray-900 dark:text-white text-3xl md:text-5xl font-extrabold mb-2">
-              How to quickly get learning from AI
+            Limited accessibility to quality educational resources
             </h1>
             <p className="text-lg font-normal text-gray-400 dark:text-gray-100 mb-6">
-              Static websites are now used to bootstrap lots of websites and are
-              becoming the basis for a variety of tools that even influence both
-              web designers and developers.
+            How can we ensure that individuals in remote or underprivileged areas have access to comprehensive and high-quality learning materials?
             </p>
             <a
               href="#"
@@ -67,12 +65,10 @@ const Featured = () => {
                 Design
               </a>
               <h2 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
-                Start with US
+             Inefficient utilization of existing learning resources
               </h2>
               <p className="text-lg font-normal text-gray-400 dark:text-gray-200 mb-4">
-                Static websites are now used to bootstrap lots of websites and
-                are becoming the basis for a variety of tools that even
-                influence both web designers and developers.
+              How can we optimize the use of already available educational resources and make them more accessible and effective for learners?
               </p>
               <a
                 href="#"
@@ -119,12 +115,10 @@ const Featured = () => {
                 Code
               </a>
               <h2 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
-                Best react libraries around the web
+               Decentralizes Resource & Asses your self
               </h2>
               <p className="text-lg font-normal text-gray-400 dark:text-gray-200 mb-4">
-                Static websites are now used to bootstrap lots of websites and
-                are becoming the basis for a variety of tools that even
-                influence both web designers and developers.
+              Course sharing involves distributing educational materials to a wide audience, while quiz assessment evaluates learners' understanding through questions, reinforcing learning and identifying areas for improvement
               </p>
               <a
                 href="#"
