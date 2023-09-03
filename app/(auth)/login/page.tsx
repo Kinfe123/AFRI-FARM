@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
     title: "Login",
     description: "Login to your account",
-};p
+};
 
 export default function LoginPage() {
     const active = {
