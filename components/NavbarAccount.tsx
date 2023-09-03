@@ -49,17 +49,17 @@ const UserAccountNav = ({ user }: any) => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem >
-          <Link href="/">Dashboard</Link>
+          <Link href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuItem >
-          <Link href="/">User Setting</Link>
+          <Link href="/setting">User Setting</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem >
-          <Link href="/">Preference</Link>
+          <Link href="/preference">Preference</Link>
         </DropdownMenuItem>
         <DropdownMenuItem >
-          <Link href="/">Share</Link>
+          <Link href="/share">Share</Link>
         </DropdownMenuItem>
 
                 

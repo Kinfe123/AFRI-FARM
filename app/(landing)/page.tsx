@@ -12,11 +12,13 @@ import Product from "@/components/Products";
 import { Accordions } from "@/components/Accordion";
 import Supported from "@/components/Supported";
 import Footer from "@/components/Footer";
+import { useEffect } from "react";
 
 const apiKey = process.env.GOOGLE_CLIENT_ID;
 
 export default function Home() {
   const user = useUser();
+  
   return (
     <NextUIProvider>
       <main className=" min-h-screen  grid place-items-center space-y-10 md:space-y-20 p-16">
