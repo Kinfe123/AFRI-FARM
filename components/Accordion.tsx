@@ -9,10 +9,14 @@ export function Accordions() {
   return (
     <Accordion type="single" collapsible className="w-2/3">
       <AccordionItem value="item-1">
-        <h1 className="text-center text-4xl font-bold">What may you ask?</h1>
+        <h1 className="text-center text-4xl font-bold text-purple-600  mb-10 ">
+          What may you ask?
+        </h1>
         <AccordionTrigger>
-          How can we ensure access to quality educational resources for
-          individuals in remote or underprivileged areas?
+          <p className="text-gray-400">
+            How can we ensure access to quality educational resources for
+            individuals in remote or underprivileged areas?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By leveraging technology and digital platforms, we can develop online
@@ -22,8 +26,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>
-          How can we optimize the utilization of existing learning resources to
-          make them more effective and accessible?
+          <p className="text-gray-400">
+            How can we optimize the utilization of existing learning resources
+            to make them more effective and accessible?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By implementing effective curation, organization, and search
@@ -33,8 +39,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionTrigger>
-          How can standardized learning paths or curriculum frameworks be
-          created to help learners navigate through courses and resources?
+          <p className="text-gray-400">
+            How can standardized learning paths or curriculum frameworks be
+            created to help learners navigate through courses and resources?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By collaborating with educators and subject matter experts, we can
@@ -45,8 +53,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-4">
         <AccordionTrigger>
-          How can learners discover and access relevant courses and learning
-          materials with the challenge of multiple platforms hosting them?
+          <p className="text-gray-400">
+            How can learners discover and access relevant courses and learning
+            materials with the challenge of multiple platforms hosting them?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By creating centralized platforms or directories that aggregate and
@@ -57,8 +67,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-5">
         <AccordionTrigger>
-          How can we improve knowledge retention and practical application of
-          online course content?
+          <p className="text-gray-400">
+            How can we improve knowledge retention and practical application of
+            online course content?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By incorporating interactive elements, practical exercises, and
@@ -68,8 +80,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-6">
         <AccordionTrigger>
-          How can we address the issue of outdated or irrelevant learning
-          resources?
+          <p className="text-gray-400">
+            How can we address the issue of outdated or irrelevant learning
+            resources?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By establishing systems for regular content review, updating, and user
@@ -79,8 +93,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-7">
         <AccordionTrigger>
-          How can we foster collaboration and knowledge sharing among learners
-          and educators?
+          <p className="text-gray-400">
+            How can we foster collaboration and knowledge sharing among learners
+            and educators?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By integrating social learning features, discussion forums, and
@@ -91,8 +107,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-8">
         <AccordionTrigger>
-          How can learners navigate and make sense of the overwhelming amount of
-          available information?
+          <p className="text-gray-400">
+            How can learners navigate and make sense of the overwhelming amount
+            of available information?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By providing intelligent search algorithms, personalized
@@ -103,8 +121,10 @@ export function Accordions() {
       </AccordionItem>
       <AccordionItem value="item-9">
         <AccordionTrigger>
-          How can learning paths and resources be personalized to meet
-          individual learners' needs, preferences, and learning styles?
+          <p className="text-gray-400">
+            How can learning paths and resources be personalized to meet
+            individual learners' needs, preferences, and learning styles?
+          </p>
         </AccordionTrigger>
         <AccordionContent>
           By leveraging learner analytics, adaptive learning technologies, and
