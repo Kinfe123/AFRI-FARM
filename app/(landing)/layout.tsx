@@ -4,6 +4,7 @@ import { Inter, Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Providers from "@/components/Provider";
 import Navbar from "@/components/Navbar";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        
         <Providers>
-          <Navbar />
-          <body className={poppins.className}>{children}</body>
+          <EdgeStoreProvider>
+            <Navbar />
+            <body className={poppins.className}>{children}</body>
+          </EdgeStoreProvider>
         </Providers>
       </ClerkProvider>
     </html>
