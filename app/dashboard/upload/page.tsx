@@ -25,9 +25,9 @@ export default async function SettingsPage() {
       <div className="grid gap-10">
         <div className="flex justify-between items-center">
           <div>List of available resources</div>
-          {/* <Button className="bg-gradient-to-tr from-purple-400/30 via-purple-400/10 to-orange-400/10 bordeer-["> */}
-            <Plus className="w-4 h-4 mr-1" /> <UploadDialog serverSesion={user} />
-          {/* </Button> */}
+          <div className="flex gap-2">
+         <UploadDialog serverSesion={user} />
+          </div>
         </div>
 
         <div>

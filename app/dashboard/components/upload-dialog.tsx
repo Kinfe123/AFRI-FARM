@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { json } from "stream/consumers"
-import { useEffect, useState } from "react"
-import { DialogClose } from "@radix-ui/react-dialog"
-import { HelperText } from "flowbite-react"
-import { getServerSession } from "next-auth"
+import { json } from "stream/consumers";
+import { useEffect, useState } from "react";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { HelperText } from "flowbite-react";
+import { getServerSession } from "next-auth";
 
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -16,49 +16,47 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-import FilePage from "./file-display"
+import FilePage from "./file-display";
 // import { MultiFileDropzone } from "./file-upload"
-import { Icons } from "@/components/icons"
-import { toast } from "@/components/ui/use-toast"
+import { Icons } from "@/components/icons";
+import { toast } from "@/components/ui/use-toast";
 // import div>If the world is ending..we all do have a code get compiled safely</div>om "./popup-dialog"
 
 function UploadDialog({ serverSesion, jobPosition }: any) {
+  console.log("THe serversession: ", serverSesion);
 
-
-    console.log("THe serversession: " , serverSesion)
-
-  const [loading, setLoading] = useState(false)
-  const [applied, setApplied] = useState(false)
-  const [disableSubmit , setDisableSubmit] = useState(false)
-  const [applicationInfo, setApplicationInfo] = useState([])
-  const [texthelper, setTextHelper] = useState<"Apply" | "Applied">("Apply")
+  const [loading, setLoading] = useState(false);
+  const [applied, setApplied] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [applicationInfo, setApplicationInfo] = useState([]);
+  const [texthelper, setTextHelper] = useState<"Apply" | "Applied">("Apply");
   const [resumeData, setResumeDate] = useState({
     firstName: "",
     lastName: "",
-    email:  "",
+    email: "",
     resumeLink: "",
     portfolioLink: "",
     referredFrom: "",
-    resumeUrl: ""
-  })
+    resumeUrl: "",
+  });
 
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState(false);
 
-  console.log("THe data are : " , resumeData)
+  console.log("THe data are : ", resumeData);
 
   const handleChange = (e: { target: { id: any; value: any } }) => {
-    setResumeDate({ ...resumeData, [e.target.id]: e.target.value })
-  }
+    setResumeDate({ ...resumeData, [e.target.id]: e.target.value });
+  };
   const handleParentUpdate = (newVal: any) => {
-    setResumeDate({...resumeData  , resumeUrl: newVal})
-  }
+    setResumeDate({ ...resumeData, resumeUrl: newVal });
+  };
 
   const handleClick = async () => {
-    setLoading(true)
+    setLoading(true);
     const req = await fetch("/api/resume", {
       method: "POST",
       headers: {
@@ -72,102 +70,99 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
         portfolioLink: resumeData.portfolioLink,
         jobType: jobPosition,
         referredFrom: resumeData.referredFrom,
-        resumeUrl: resumeData.resumeUrl
+        resumeUrl: resumeData.resumeUrl,
       }),
-    })
+    });
 
     // console.log("The data as a response: " , req)
-    setLoading(false)
+    setLoading(false);
     if (!req.ok) {
       return toast({
         title: "Something went wrong.",
         description: "We can't receive your application. Please try again.",
         variant: "destructive",
-      })
+      });
     } else {
-      sendEmail()
-      sendAdminEmail()
-      setDisableSubmit(true)
+      sendEmail();
+      sendAdminEmail();
+      setDisableSubmit(true);
       return toast({
         title: "Successfully Sent",
         description: `Thanks ${resumeData.firstName} for applying ${jobPosition}. We will contact you if you are a good fit. `,
         variant: "default",
-      })
+      });
     }
 
-// function call to send an email to user who applied to us.
-
-
-
-  }
+    // function call to send an email to user who applied to us.
+  };
 
   const sendEmail = async () => {
-    const response = await fetch("/api/send" , {
-      method:'POST',
-      body:JSON.stringify({
-        name: resumeData.firstName + " "+  resumeData.lastName,
-        emailAddress : resumeData.email,
+    const response = await fetch("/api/send", {
+      method: "POST",
+      body: JSON.stringify({
+        name: resumeData.firstName + " " + resumeData.lastName,
+        emailAddress: resumeData.email,
         jobPosition: jobPosition,
-
-      })
-    })
-    const jsonResponse = await response.json()
+      }),
+    });
+    const jsonResponse = await response.json();
     // console.log("THe response comes as json : " , jsonResponse)
-
-  }
+  };
   const sendAdminEmail = async () => {
-    const response = await fetch("/api/send-admin" , {
-      method:'POST',
-      body:JSON.stringify({
-        name: resumeData.firstName + " "+  resumeData.lastName,
-        emailAddress : resumeData.email,
+    const response = await fetch("/api/send-admin", {
+      method: "POST",
+      body: JSON.stringify({
+        name: resumeData.firstName + " " + resumeData.lastName,
+        emailAddress: resumeData.email,
         jobPosition: jobPosition,
         resumeLink: resumeData.resumeLink,
         resumeUrl: resumeData.resumeUrl,
         portfolioLink: resumeData.portfolioLink,
-        referredFrom: resumeData.referredFrom
-
-      })
-    })
-    const jsonResponse = await response.json()
+        referredFrom: resumeData.referredFrom,
+      }),
+    });
+    const jsonResponse = await response.json();
     // console.log("THe response comes as json : " , jsonResponse)
+  };
 
-  }
-
-
-//   const disbales = jobApplied.includes(jobId)
+  //   const disbales = jobApplied.includes(jobId)
   const fetcher = async () => {
-    const res = await fetch("/api/jobapplied")
-    const json = await res.json()
+    const res = await fetch("/api/jobapplied");
+    const json = await res.json();
     // return json
     // const mappedId = json.map((job: { jobId: any }) => job.jobId)
-  
+
     // setApplicationInfo(mappedId)
-  }
+  };
   useEffect(() => {
-    fetcher()
-  }, [])
+    fetcher();
+  }, []);
 
   useEffect(() => {
-    fetcher()
-  }, [loading])
-  if(!serverSesion){
-    return <div>If the world is ending..we all do have a code get compiled safely</div>
+    fetcher();
+  }, [loading]);
+  if (!serverSesion) {
+    return (
+      <div>
+        If the world is ending..we all do have a code get compiled safely
+      </div>
+    );
   }
-
 
   return (
     <Dialog>
-      {applied && <p className="flex   mx0-auto tracking-normal text-muted-foreground justify-center items-center mt-10 mb-10">You have already applied for the job!</p> }
+      {applied && (
+        <p className="flex   mx0-auto tracking-normal text-muted-foreground justify-center items-center mt-10 mb-10">
+          You have already applied for the job!
+        </p>
+      )}
       <DialogTrigger asChild>
         {/* {jobApplied.includes(jobId) && (<Button variant="outline" size='lg' className="bg-gray-800 text-white   transition ease-in-out duration-150 dark:bg-white  dark:text-black" disabled={true}>Applied</Button>) } */}
-
 
         <Button
           variant="outline"
           size="lg"
           className="bg-gray-800 my-5 text-white  mx-auto flex justify-center items-center   transition ease-in-out duration-150 dark:bg-white  dark:text-black"
-       
         >
           Post
         </Button>
@@ -271,8 +266,8 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
           </button>
         </DialogFooter>
       </DialogContent>
-  </Dialog>
-  )
+    </Dialog>
+  );
 }
 
-export default UploadDialog
+export default UploadDialog;
