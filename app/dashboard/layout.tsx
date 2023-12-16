@@ -2,10 +2,12 @@ import Providers from "@/components/Provider";
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { getUser } from "@/lib/curruser";
+import { Toaster } from "@/components/ui/toaster";
 import { dashboardConfig } from "@/config/dashboard";
 import { MainNav } from "./components/main-nav";
 import UserAccountNav from "@/components/NavbarAccount";
 import { DashboardNav } from "@/components/DashboardNav";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 export const metadata = {
   title: "Next.js",
@@ -36,6 +38,7 @@ export default async function RootLayout({
     <html lang="en">
       <ClerkProvider>
         <Providers>
+          <EdgeStoreProvider>
           <body className="min-h-screen ">
             <div className="flex min-h-screen flex-col space-y-6">
               <header className="sticky top-0 z-40 border-b bg-background">
@@ -61,6 +64,10 @@ export default async function RootLayout({
               {/* <Footer /> */}
             </div>
           </body>
+
+
+          </EdgeStoreProvider>
+          <Toaster />
         </Providers>
       </ClerkProvider>
     </html>

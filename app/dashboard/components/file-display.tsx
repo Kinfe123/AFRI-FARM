@@ -47,7 +47,7 @@ function MultiImageExample({updateData}) {
         value={fileStates}
         dropzoneOptions={{
           maxFiles: 10,
-          maxSize: 1024 * 1024 * 1, // 1 MB
+          maxSize: 1024 * 1024 * 10, // 1 MB
         }}
         onFilesAdded={async (addedFiles) => {
           setFileStates([...fileStates, ...addedFiles]);

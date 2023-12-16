@@ -114,8 +114,12 @@ model Question {
 model Resource {
   id          String   @id @default(cuid())
   authorId    String
+  FirstName   String
+  Email       String
+  LastName    String
   type        String
   description String
+  resourceUrl String
   image       String?
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")

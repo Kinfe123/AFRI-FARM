@@ -6,7 +6,7 @@ export const getUser = async () => {
         return null;
     }else {
         const user = await clerkClient.users.getUser(userId)
-        console.log("The user; " , user)
+    
 
         return user
 

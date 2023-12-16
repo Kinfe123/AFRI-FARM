@@ -4,9 +4,26 @@ import { json } from "stream/consumers";
 import { useEffect, useState } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { HelperText } from "flowbite-react";
+import { Textarea } from "@/components/ui/textarea";
 import { getServerSession } from "next-auth";
 
+import { Check, ChevronsUpDown } from "lucide-react";
+
 import { cn } from "@/lib/utils";
+
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
@@ -30,65 +47,64 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
   console.log("THe serversession: ", serverSesion);
 
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
   const [applied, setApplied] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [applicationInfo, setApplicationInfo] = useState([]);
   const [texthelper, setTextHelper] = useState<"Apply" | "Applied">("Apply");
-  const [resumeData, setResumeDate] = useState({
+  const [uploadData, setUploadData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    resumeLink: "",
-    portfolioLink: "",
-    referredFrom: "",
-    resumeUrl: "",
+    resouceUrl: "",
+    description: "",
   });
 
   const [clicked, setClicked] = useState(false);
 
-  console.log("THe data are : ", resumeData);
+  console.log("THe data are : ", serverSesion.id);
 
   const handleChange = (e: { target: { id: any; value: any } }) => {
-    setResumeDate({ ...resumeData, [e.target.id]: e.target.value });
+    setUploadData({ ...uploadData, [e.target.id]: e.target.value });
   };
   const handleParentUpdate = (newVal: any) => {
-    setResumeDate({ ...resumeData, resumeUrl: newVal });
+    setUploadData({ ...uploadData, resouceUrl: newVal });
   };
 
   const handleClick = async () => {
     setLoading(true);
-    const req = await fetch("/api/resume", {
+    const req = await fetch("/api/upload", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        firstName: resumeData.firstName,
-        lastName: resumeData.lastName,
-        email: resumeData.email,
-        resumeLink: resumeData.resumeLink,
-        portfolioLink: resumeData.portfolioLink,
-        jobType: jobPosition,
-        referredFrom: resumeData.referredFrom,
-        resumeUrl: resumeData.resumeUrl,
+        authorId: serverSesion.id,
+        firstName: uploadData.firstName,
+        lastName: uploadData.lastName,
+        email: serverSesion.emailAddresses[0].emailAddress,
+        resourceUrl: uploadData.resouceUrl,
+        description: uploadData.description,
+        type: value,
       }),
     });
 
-    // console.log("The data as a response: " , req)
+    console.log("The data as a response: " , req)
     setLoading(false);
     if (!req.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "We can't receive your application. Please try again.",
+        description: "We can't receive the resources at the moment . Please try again.",
         variant: "destructive",
       });
     } else {
-      sendEmail();
-      sendAdminEmail();
+      //   sendEmail();
+      //   sendAdminEmail();
       setDisableSubmit(true);
       return toast({
         title: "Successfully Sent",
-        description: `Thanks ${resumeData.firstName} for applying ${jobPosition}. We will contact you if you are a good fit. `,
+        description: `Thanks ${uploadData.firstName} You have successfully uploaded a resource for talent pool. `,
         variant: "default",
       });
     }
@@ -96,34 +112,34 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
     // function call to send an email to user who applied to us.
   };
 
-  const sendEmail = async () => {
-    const response = await fetch("/api/send", {
-      method: "POST",
-      body: JSON.stringify({
-        name: resumeData.firstName + " " + resumeData.lastName,
-        emailAddress: resumeData.email,
-        jobPosition: jobPosition,
-      }),
-    });
-    const jsonResponse = await response.json();
-    // console.log("THe response comes as json : " , jsonResponse)
-  };
-  const sendAdminEmail = async () => {
-    const response = await fetch("/api/send-admin", {
-      method: "POST",
-      body: JSON.stringify({
-        name: resumeData.firstName + " " + resumeData.lastName,
-        emailAddress: resumeData.email,
-        jobPosition: jobPosition,
-        resumeLink: resumeData.resumeLink,
-        resumeUrl: resumeData.resumeUrl,
-        portfolioLink: resumeData.portfolioLink,
-        referredFrom: resumeData.referredFrom,
-      }),
-    });
-    const jsonResponse = await response.json();
-    // console.log("THe response comes as json : " , jsonResponse)
-  };
+  //   const sendEmail = async () => {
+  //     const response = await fetch("/api/send", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         name: uploadData.firstName + " " + uploadData.lastName,
+  //         emailAddress: uploadData.email,
+  //         jobPosition: jobPosition,
+  //       }),
+  //     });
+  //     const jsonResponse = await response.json();
+  //     // console.log("THe response comes as json : " , jsonResponse)
+  //   };
+  //   const sendAdminEmail = async () => {
+  //     const response = await fetch("/api/send-admin", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         name: uploadData.firstName + " " + uploadData.lastName,
+  //         emailAddress: uploadData.email,
+  //         jobPosition: jobPosition,
+  //         resumeLink: uploadData.resumeLink,
+  //         resouceUrl: uploadData.resouceUrl,
+  //         portfolioLink: uploadData.portfolioLink,
+  //         referredFrom: uploadData.referredFrom,
+  //       }),
+  //     });
+  //     const jsonResponse = await response.json();
+  //     // console.log("THe response comes as json : " , jsonResponse)
+  //   };
 
   //   const disbales = jobApplied.includes(jobId)
   const fetcher = async () => {
@@ -148,6 +164,25 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
       </div>
     );
   }
+
+  const types_ = [
+    {
+      value: "pdf",
+      label: "Pdf",
+    },
+    {
+      value: "video",
+      label: "Video",
+    },
+    {
+      value: "cheatsheet",
+      label: "Cheatsheet",
+    },
+    {
+      value: "link",
+      label: "Link",
+    },
+  ];
 
   return (
     <Dialog>
@@ -183,7 +218,7 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
             <Input
               id="firstName"
               onChange={handleChange}
-              value={resumeData.firstName}
+              value={uploadData.firstName}
               className="col-span-3"
             />
           </div>
@@ -195,60 +230,76 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
             <Input
               id="lastName"
               onChange={handleChange}
-              value={resumeData.lastName}
+              value={uploadData.lastName}
               className="col-span-3"
             />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+          <Label htmlFor="username" className="text-right">
+              Type
+            </Label>
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open}
+                  className="w-[200px] justify-between"
+                >
+                  {value
+                    ? types_.find((framework) => framework.value === value)
+                        ?.label
+                    : "Select Type  ..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[200px] p-0">
+                <Command>
+                  <CommandInput placeholder="Search Type..." />
+                  <CommandEmpty>No Type found.</CommandEmpty>
+                  <CommandGroup>
+                    {types_.map((framework) => (
+                      <CommandItem
+                        key={framework.value}
+                        value={framework.value}
+                        onSelect={(currentValue) => {
+                          setValue(currentValue === value ? "" : currentValue);
+                          setOpen(false);
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            value === framework.value
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                        {framework.label}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </Command>
+              </PopoverContent>
+            </Popover>
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
-              Email
+              Description
             </Label>
-            <Input
-              id="email"
-              value={resumeData.email}
+            <Textarea
+              id="description"
+              value={uploadData.description}
               onChange={handleChange}
               className="col-span-3"
             />
           </div>
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
-              Portfolio
-            </Label>
-            <Input
-              value={resumeData.portfolioLink}
-              id="portfolioLink"
-              onChange={handleChange}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="resume" className="text-right">
-              Referred From
-            </Label>
-            <Input
-              value={resumeData.referredFrom}
-              id="referredFrom"
-              onChange={handleChange}
-              placeholder="A name of person referred you here"
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="resume" className="text-right">
-              Resume Link
-            </Label>
-            <Input
-              value={resumeData.resumeLink}
-              id="resumeLink"
-              onChange={handleChange}
-              className="col-span-3"
-            />
-          </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-background px-2 text-muted-foreground">
-              Or Upload Your Resume
+              Or Upload Your Resource
             </span>
           </div>
           <div className="flex justify-end items-end">

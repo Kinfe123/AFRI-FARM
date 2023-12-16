@@ -8,8 +8,8 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import UploadDialog from "../components/upload-dialog";
 export const metadata = {
-  title: "Settings",
-  description: "Manage account and website settings.",
+  title: "Upload",
+  description: "Upload Resource",
 };
 
 export default async function SettingsPage() {
