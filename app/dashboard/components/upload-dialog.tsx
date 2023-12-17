@@ -59,6 +59,7 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
     email: "",
     resouceUrl: "",
     description: "",
+    title: ""
   });
 
   const [clicked, setClicked] = useState(false);
@@ -87,6 +88,7 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
         resourceUrl: uploadData.resouceUrl,
         description: uploadData.description,
         type: value,
+        title: uploadData.title
       }),
     });
 
@@ -231,6 +233,18 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
               id="lastName"
               onChange={handleChange}
               value={uploadData.lastName}
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Title
+            </Label>
+
+            <Input
+              id="title"
+              onChange={handleChange}
+              value={uploadData.title}
               className="col-span-3"
             />
           </div>

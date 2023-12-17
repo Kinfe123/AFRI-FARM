@@ -42,7 +42,8 @@ export async function POST(req: Request) {
                 Email: body.email,
                 type: body.type,
                 description: body.description,
-                resourceUrl: body.resourceUrl
+                resourceUrl: body.resourceUrl,
+                Title: body.title,
                 
              
 

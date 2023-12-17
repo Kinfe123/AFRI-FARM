@@ -115,6 +115,7 @@ model Resource {
   id          String   @id @default(cuid())
   authorId    String
   FirstName   String
+  Title       String?
   Email       String
   LastName    String
   type        String
