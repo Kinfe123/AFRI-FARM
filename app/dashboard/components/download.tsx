@@ -1,11 +1,14 @@
 'use client'
-
+//@ts-ignore
 import { saveAs } from "file-saver";
 import { Download } from "lucide-react";
-import { Button } from "react-day-picker";
+import { Button } from "@/components/ui/button";
 
 const DownloadPage = ({ url }: { url: string }) => {
+    console.log('HELLO WORLD' , url)
+    
   const saveFile = () => {
+    window.location.href = url
     saveAs(url);
   };
   return (
