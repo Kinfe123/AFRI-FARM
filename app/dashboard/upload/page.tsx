@@ -35,6 +35,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { prisma } from "@/lib/db";
 import DownloadPage from "../components/download";
+import { timeAgo } from "@/lib/utils";
 export const metadata = {
   title: "Upload",
   description: "Upload Resource",
@@ -79,22 +80,15 @@ export default async function SettingsPage() {
               //      </div>
               //      </div>
               //   </div>
-              <Card key={r.id}>
-                <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0 relative">
-                  <div className="space-y-1">
+              <Card key={r.id} className="rounded-3xl  bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent">
+                <CardHeader className="grid grid-cols-[1fr_10px] items-start gap-4 space-y-0 relative">
+                  <div className="space-y-3">
                     <CardTitle>{r.Title}</CardTitle>
 
-                    <CardDescription>
-                      {r.description}
-                    </CardDescription>
-                  </div>
-                  <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground absolute top-5 right-5">
-                    <DownloadPage url={r.resourceUrl}/>
-                    <Separator orientation="vertical" className="h-[20px]" />
-                
+                    <CardDescription>{r.description}</CardDescription>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="relative">
                   <div className="flex space-x-4 text-sm text-muted-foreground">
                     <div className="flex items-center">
                       <CircleIcon className="mr-1 h-3 w-3 fill-sky-400 text-sky-400" />
@@ -104,8 +98,20 @@ export default async function SettingsPage() {
                       <StarIcon className="mr-1 h-3 w-3" />
                       20k
                     </div>
-                    <div>Updated April 2023</div>
+                    <br />
                   </div>
+                    <div className="flex mt-2 justify-between text-muted-foreground">
+                      <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground ">
+                        <DownloadPage url={r.resourceUrl} />
+                        <Separator
+                          orientation="vertical"
+                          className="h-[20px]"
+                        />
+                      </div>
+                      <div className="">
+                        <p>{timeAgo(r.updatedAt)}</p>
+                      </div>
+                    </div>
                 </CardContent>
               </Card>
             );
