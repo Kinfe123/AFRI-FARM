@@ -118,6 +118,7 @@ model Resource {
   Title       String?
   Email       String
   LastName    String
+  gradeLevel  String?
   type        String
   description String
   resourceUrl String

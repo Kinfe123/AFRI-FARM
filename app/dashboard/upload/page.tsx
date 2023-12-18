@@ -8,7 +8,7 @@ import {
   ChevronDownIcon,
   CircleIcon,
   Download,
-  Plus,
+  Option,
   PlusIcon,
   StarIcon,
 } from "lucide-react";
@@ -28,7 +28,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
@@ -36,6 +40,7 @@ import { Separator } from "@/components/ui/separator";
 import { prisma } from "@/lib/db";
 import DownloadPage from "../components/download";
 import { timeAgo } from "@/lib/utils";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 export const metadata = {
   title: "Upload",
   description: "Upload Resource",
@@ -80,7 +85,10 @@ export default async function SettingsPage() {
               //      </div>
               //      </div>
               //   </div>
-              <Card key={r.id} className="rounded-3xl  bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent">
+              <Card
+                key={r.id}
+                className="rounded-3xl relative  bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent"
+              >
                 <CardHeader className="grid grid-cols-[1fr_10px] items-start gap-4 space-y-0 relative">
                   <div className="space-y-3">
                     <CardTitle>{r.Title}</CardTitle>
@@ -88,7 +96,48 @@ export default async function SettingsPage() {
                     <CardDescription>{r.description}</CardDescription>
                   </div>
                 </CardHeader>
-                <CardContent className="relative">
+                <CardContent>
+                  <div className="absolute top-2 right-2">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+                        >
+                          <DotsHorizontalIcon className="h-4 w-4" />
+                          <span className="sr-only">Open menu</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-[160px]">
+                        <DropdownMenuItem>Edit</DropdownMenuItem>
+                        <DropdownMenuItem>Make a copy</DropdownMenuItem>
+                        <DropdownMenuItem>Favorite</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        {/* <DropdownMenuSub>
+                          <DropdownMenuSubTrigger>
+                            Labels
+                          </DropdownMenuSubTrigger>
+                          <DropdownMenuSubContent>
+                            <DropdownMenuRadioGroup value={task.label}>
+                              {labels.map((label) => (
+                                <DropdownMenuRadioItem
+                                  key={label.value}
+                                  value={label.value}
+                                >
+                                  {label.label}
+                                </DropdownMenuRadioItem>
+                              ))}
+                            </DropdownMenuRadioGroup>
+                          </DropdownMenuSubContent>
+                        </DropdownMenuSub> */}
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                          Delete
+                          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                   <div className="flex space-x-4 text-sm text-muted-foreground">
                     <div className="flex items-center">
                       <CircleIcon className="mr-1 h-3 w-3 fill-sky-400 text-sky-400" />
@@ -100,18 +149,15 @@ export default async function SettingsPage() {
                     </div>
                     <br />
                   </div>
-                    <div className="flex mt-2 justify-between text-muted-foreground">
-                      <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground ">
-                        <DownloadPage url={r.resourceUrl} />
-                        <Separator
-                          orientation="vertical"
-                          className="h-[20px]"
-                        />
-                      </div>
-                      <div className="">
-                        <p>{timeAgo(r.updatedAt)}</p>
-                      </div>
+                  <div className="flex mt-2 justify-between text-muted-foreground">
+                    <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground ">
+                      <DownloadPage url={r.resourceUrl} />
+                      <Separator orientation="vertical" className="h-[20px]" />
                     </div>
+                    <div className="">
+                      <p>{timeAgo(r.updatedAt)}</p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             );

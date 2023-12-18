@@ -48,18 +48,19 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const [value, setValue] = useState("");
+  const [values1, setValues1] = useState("grade11");
   const [applied, setApplied] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
-  const [applicationInfo, setApplicationInfo] = useState([]);
-  const [texthelper, setTextHelper] = useState<"Apply" | "Applied">("Apply");
+
   const [uploadData, setUploadData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     resouceUrl: "",
     description: "",
-    title: ""
+    title: "",
   });
 
   const [clicked, setClicked] = useState(false);
@@ -88,16 +89,18 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
         resourceUrl: uploadData.resouceUrl,
         description: uploadData.description,
         type: value,
-        title: uploadData.title
+        title: uploadData.title,
+        grade: values1
       }),
     });
 
-    console.log("The data as a response: " , req)
+    console.log("The data as a response: ", req);
     setLoading(false);
     if (!req.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "We can't receive the resources at the moment . Please try again.",
+        description:
+          "We can't receive the resources at the moment . Please try again.",
         variant: "destructive",
       });
     } else {
@@ -113,35 +116,6 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
 
     // function call to send an email to user who applied to us.
   };
-
-  //   const sendEmail = async () => {
-  //     const response = await fetch("/api/send", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         name: uploadData.firstName + " " + uploadData.lastName,
-  //         emailAddress: uploadData.email,
-  //         jobPosition: jobPosition,
-  //       }),
-  //     });
-  //     const jsonResponse = await response.json();
-  //     // console.log("THe response comes as json : " , jsonResponse)
-  //   };
-  //   const sendAdminEmail = async () => {
-  //     const response = await fetch("/api/send-admin", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         name: uploadData.firstName + " " + uploadData.lastName,
-  //         emailAddress: uploadData.email,
-  //         jobPosition: jobPosition,
-  //         resumeLink: uploadData.resumeLink,
-  //         resouceUrl: uploadData.resouceUrl,
-  //         portfolioLink: uploadData.portfolioLink,
-  //         referredFrom: uploadData.referredFrom,
-  //       }),
-  //     });
-  //     const jsonResponse = await response.json();
-  //     // console.log("THe response comes as json : " , jsonResponse)
-  //   };
 
   //   const disbales = jobApplied.includes(jobId)
   const fetcher = async () => {
@@ -186,6 +160,25 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
     },
   ];
 
+  const grades = [
+    {
+      value: "Grade9",
+      label: "Grade 9",
+    },
+    {
+      value: "Grade10",
+      label: "Grade 10",
+    },
+    {
+      value: "Grade11",
+      label: "Grade 11",
+    },
+    {
+      value: "Grade12",
+      label: "Grade 12",
+    },
+  ];
+  console.log("THe selected type : ", values1);
   return (
     <Dialog>
       {applied && (
@@ -250,7 +243,7 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="username" className="text-right">
+            <Label htmlFor="username" className="text-right">
               Type
             </Label>
             <Popover open={open} onOpenChange={setOpen}>
@@ -262,8 +255,7 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
                   className="w-[200px] justify-between"
                 >
                   {value
-                    ? types_.find((framework) => framework.value === value)
-                        ?.label
+                    ? types_.find((typo) => typo.value === value)?.label
                     : "Select Type  ..."}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
@@ -273,10 +265,10 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
                   <CommandInput placeholder="Search Type..." />
                   <CommandEmpty>No Type found.</CommandEmpty>
                   <CommandGroup>
-                    {types_.map((framework) => (
+                    {types_.map((typo) => (
                       <CommandItem
-                        key={framework.value}
-                        value={framework.value}
+                        key={typo.value}
+                        value={typo.value}
                         onSelect={(currentValue) => {
                           setValue(currentValue === value ? "" : currentValue);
                           setOpen(false);
@@ -285,12 +277,57 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            value === framework.value
-                              ? "opacity-100"
-                              : "opacity-0"
+                            value === typo.value ? "opacity-100" : "opacity-0"
                           )}
                         />
-                        {framework.label}
+                        {typo.label}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Grade Level
+            </Label>
+            <Popover open={open2} onOpenChange={setOpen2}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open2}
+                  className="w-[200px] justify-between"
+                >
+                  {values1}
+                  {/* {values1
+                    ? grades.find((g) => g.value === values1)?.label
+                    : "Select Grade  ..."} */}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[200px] p-0">
+                <Command>
+                  <CommandInput placeholder="Search Type..." />
+                  <CommandEmpty>No Grade found.</CommandEmpty>
+                  <CommandGroup>
+                    {grades.map((grade) => (
+                      <CommandItem
+                        key={grade.value}
+                        value={grade.value}
+                        onSelect={(currentValue) => {
+                          setValues1(currentValue === values1 ? "" : currentValue);
+                          setOpen2(false);
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            values1 === grade.value ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                        {grade.label}
                       </CommandItem>
                     ))}
                   </CommandGroup>
