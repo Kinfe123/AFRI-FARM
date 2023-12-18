@@ -1,3 +1,4 @@
+
 import { redirect } from "next/navigation";
 
 import { DashboardHeader } from "@/components/header";
@@ -55,6 +56,24 @@ export default async function SettingsPage() {
 
   if (!user) {
     redirect("/login");
+  }
+
+  const handleDelete = async (id:any) => {
+
+    const req = await fetch("/api/upload/"  , {
+      method:"DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      })
+
+
+    })
+    const res = await req.json()
+    console.log('The reponse :' , res)
+
   }
 
   return (

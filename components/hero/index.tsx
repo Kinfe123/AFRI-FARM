@@ -35,7 +35,7 @@ export const HeroSection = () => {
               </svg> */}
 
               <h2 className=" items-center justify-center font-heading text-lg leading-[1.1] md:text-xl  ">
-                Let's OpenSource the Education 
+                Let's Help the Education 
               </h2>
             </div>
           </Link>
@@ -81,7 +81,7 @@ export const HeroSection = () => {
                 <span className="bg-gradient-to-br from-indigo-300 to-purple-600 bg-clip-text text-transparent">
                   02
                 </span>
-                <span className="">Start Creating course</span>
+                <span className="">Prepare the mega mind</span>
               </div>
               <div className="flex gap-2">
                 <svg

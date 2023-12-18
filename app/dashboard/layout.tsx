@@ -22,7 +22,7 @@ export default async function RootLayout({
 
   const user = await getUser()
   let adminPage = {}
-  if(user?.emailAddresses[0].emailAddress === process.env.ADMIN_EMAIL){
+  if(user?.emailAddresses[0].emailAddress === process.env.ADMIN_EMAIL || user?.emailAddresses[0].emailAddress === process.env.ADMIN_EMAIL2){
 
      adminPage = {
      title: "Upload Resource",

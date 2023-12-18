@@ -59,3 +59,25 @@ export async function GET(req: Request) {
   }
 }
 
+
+export async function DELETE(req: Request) {
+  try {
+    const body = await req.json()
+    console.log("THe body is: " , body)
+    
+    const res = await prisma.resource.delete({
+      where: {
+        id: body.id,
+      }
+    });
+
+    return new Response(JSON.stringify(res));
+  } catch (err) {
+    console.log("The error has occurred");
+  }
+}
+
+
+
+
+
