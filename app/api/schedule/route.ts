@@ -26,11 +26,13 @@ export async function POST(req: Request) {
         title: title
 
       },
-    });
+    }); 
+
+
 
     return new Response(JSON.stringify(schedule));
   } catch (err) {
-    console.log("Error has occured while scheduling...");
+    console.log("Error has occured while scheduling... ," , err);
     return new Response("Error has occured", { status: 404 });
   }
 }

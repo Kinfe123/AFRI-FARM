@@ -44,11 +44,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
   console.log("THe serversession: ", serverSesion);
 
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  const [value, setValue] = useState("");
-  const [values1, setValues1] = useState("grade11");
-  const [applied, setApplied] = useState(false);
+
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [date, setDate] = useState<Date>();
 
@@ -95,7 +91,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
           "We can't receive the schedule at the moment please try again later",
         variant: "destructive",
       });
-    } else {
+    } else   {
       //   sendEmail();
       //   sendAdminEmail();
       setDisableSubmit(true);
@@ -150,7 +146,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
           size="lg"
           className="bg-gray-800 my-5 text-white  mx-auto flex justify-center items-center   transition ease-in-out duration-150 dark:bg-white  dark:text-black"
         >
-          Post
+          Schedule  
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
@@ -174,7 +170,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
             </Label>
 
             <Input
-              id="lastName"
+              id="time"
               onChange={handleChange}
               value={uploadData.time}
               className="col-span-3"
@@ -182,12 +178,12 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
+            <Label htmlFor="title" className="text-right">
               Title
             </Label>
 
             <Input
-              id="lastName"
+              id="title"
               onChange={handleChange}
               value={uploadData.title}
               className="col-span-3"
@@ -196,7 +192,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
+            <Label htmlFor="description" className="text-right">
               Description
             </Label>
             <Textarea
