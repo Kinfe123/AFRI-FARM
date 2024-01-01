@@ -70,7 +70,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
 
   const handleClick = async () => {
     setLoading(true);
-    const req = await fetch("/api/upload", {
+    const req = await fetch("/api/schedule", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
       }),
     });
 
-    console.log("The data as a response: ", req);
+    console.log("The data as a response from scheduling: ", req);
     setLoading(false);
     if (!req.ok) {
       return toast({
@@ -133,43 +133,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
     );
   }
 
-  const types_ = [
-    {
-      value: "pdf",
-      label: "Pdf",
-    },
-    {
-      value: "video",
-      label: "Video",
-    },
-    {
-      value: "cheatsheet",
-      label: "Cheatsheet",
-    },
-    {
-      value: "link",
-      label: "Link",
-    },
-  ];
 
-  const grades = [
-    {
-      value: "Grade9",
-      label: "Grade 9",
-    },
-    {
-      value: "Grade10",
-      label: "Grade 10",
-    },
-    {
-      value: "Grade11",
-      label: "Grade 11",
-    },
-    {
-      value: "Grade12",
-      label: "Grade 12",
-    },
-  ];
   console.log("THe selected type : ", date);
   return (
     <Dialog>
@@ -191,7 +155,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Fill in the infos for - {jobPosition}</DialogTitle>
+          <DialogTitle>Schedule Your Study</DialogTitle>
           <DialogDescription>
            Schedule yourself a time and gear up stuff.
           </DialogDescription>

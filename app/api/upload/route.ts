@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     //     return new Response("Unauthorized" , {status:403})
     // const {user} = session
     const body = await req.json();
-    console.log('THe body is : ' , body)
+   
 
     if (!body) {
       return new Response("No body provided!", { status: 400 });

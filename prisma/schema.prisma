@@ -126,3 +126,14 @@ model Resource {
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")
 }
+
+model Schedule {
+  id          String   @id @default(cuid())
+  authorId    String
+  time        String
+  title       String
+  date        DateTime
+  description String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @default(now()) @map(name: "updated_at")
+}
