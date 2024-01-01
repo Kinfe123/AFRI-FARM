@@ -212,9 +212,22 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
             <Input
               id="lastName"
               onChange={handleChange}
-              value={uploadData.lastName}
+              value={uploadData.time}
               className="col-span-3"
               placeholder="HH:MM"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Title
+            </Label>
+
+            <Input
+              id="lastName"
+              onChange={handleChange}
+              value={uploadData.title}
+              className="col-span-3"
+             
             />
           </div>
 
