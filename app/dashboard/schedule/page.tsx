@@ -41,6 +41,7 @@ import { prisma } from "@/lib/db";
 import DownloadPage from "../components/download";
 import { timeAgo } from "@/lib/utils";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import ScheduleUpload from "@/components/schedule-dialog";
 export const metadata = {
   title: "Schedule",
   description: "Schedule Your Study Time",
@@ -59,7 +60,7 @@ export default async function SchedulePage() {
           <div>List of available schedule</div>
 
           <div className="flex gap-2">
-            <UploadDialog serverSesion={user} />
+            <ScheduleUpload serverSesion={user} />
           </div>
         </div>
 
