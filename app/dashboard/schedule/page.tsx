@@ -64,11 +64,11 @@ export default async function SchedulePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <p className="text-center text-2xl flex justify-center items-center">There is no available schedule currenty</p>
 
           </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         </div>
       </div>
     </DashboardShell>
