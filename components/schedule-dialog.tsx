@@ -193,7 +193,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
         <DialogHeader>
           <DialogTitle>Fill in the infos for - {jobPosition}</DialogTitle>
           <DialogDescription>
-            Make changes to your self by starting a journey with us.
+           Schedule yourself a time and gear up stuff.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
