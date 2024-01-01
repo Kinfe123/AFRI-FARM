@@ -3,5 +3,5 @@ import { authMiddleware } from "@clerk/nextjs";
 export default authMiddleware({});
  
 export const config = {
-  matcher: ["/dashboard" , '/dashboard/upload', "/(api|trpc)(.*)"],
+  matcher: ["/dashboard"  , '/schedule', '/resources' , '/dashboard/upload', "/(api|trpc)(.*)"],
 };
