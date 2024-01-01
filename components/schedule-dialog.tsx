@@ -106,31 +106,8 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
   };
 
   //   const disbales = jobApplied.includes(jobId)
-  const fetcher = async () => {
-    const res = await fetch("/api/jobapplied");
-    const json = await res.json();
-    // return json
-    // const mappedId = json.map((job: { jobId: any }) => job.jobId)
-
-    // setApplicationInfo(mappedId)
-  };
-  useEffect(() => {
-    fetcher();
-  }, []);
-
-  useEffect(() => {
-    fetcher();
-  }, [loading]);
-  if (!serverSesion) {
-    return (
-      <div>
-        If the world is ending..we all do have a code get compiled safely
-      </div>
-    );
-  }
 
 
-  console.log("THe selected type : ", date);
   return (
     <Dialog>
       {/* {applied && (
