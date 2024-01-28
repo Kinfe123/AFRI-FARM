@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
     const { title, description, date, authorId, time , endTime } = body;
 
-    console.log('THe date is: ' , date)
+    console.log('THe date is:')
 
     const schedule = await prisma.schedule.create({
       data: {

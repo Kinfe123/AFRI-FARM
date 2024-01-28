@@ -13,7 +13,7 @@ import UserAvatar from "./DisplayAvatar"
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { LogOut , LogIn } from "lucide-react";
-import { useClerk, useUser } from "@clerk/nextjs";
+import { UserButton, useClerk, useUser } from "@clerk/nextjs";
 
 type Props = {
   user: Pick<User, "name" | "image" | "email">;
@@ -38,7 +38,8 @@ const UserAccountNav = ({ user }: any) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent  align="end">
         <div className="flex items-center justify-start gap-2 p-2">
-          <div className="flex flex-col space-y-1 leading-none">
+          <div className="flex flex-col space-y-1 leading-none z-10">
+            <UserButton afterSignOutUrl="/" />
             {currentUser.user?.fullName && <p className="font-medium">{currentUser.user.fullName}</p>}
             {currentUser.user?.emailAddresses[0].emailAddress && (
               <p className="w-[200px] truncate text-sm text-zinc-700">
@@ -64,7 +65,7 @@ const UserAccountNav = ({ user }: any) => {
 
                 
         <DropdownMenuSeparator />
-    
+         {/* @ts-ignore */}
         <DropdownMenuItem
           onSelect={async (event: {event:any}) => {
             event.preventDefault();

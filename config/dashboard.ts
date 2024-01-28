@@ -33,6 +33,11 @@ export const dashboardConfig: any = {
       href: "/dashboard/progress",
       icon: "billing",
     },
+    {
+      title: "Manage User Account",
+      href: "/dashboard/account",
+      icon: "user",
+    },
   ],
 }
 
