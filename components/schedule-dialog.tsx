@@ -41,8 +41,6 @@ import { toast } from "@/components/ui/use-toast";
 import { SchedulePicker } from "./calender-schdule";
 
 function ScheduleUpload({ serverSesion, jobPosition }: any) {
-  console.log("THe serversession: ", serverSesion);
-
   const [loading, setLoading] = useState(false);
 
   const [disableSubmit, setDisableSubmit] = useState(false);
@@ -58,14 +56,16 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
 
   const [clicked, setClicked] = useState(false);
 
-  console.log("THe data are : ", serverSesion.id);
+
 
   const handleChange = (e: { target: { id: any; value: any } }) => {
     setUploadData({ ...uploadData, [e.target.id]: e.target.value });
   };
  
 
+ 
   const handleClick = async () => {
+
     setLoading(true);
     const req = await fetch("/api/schedule", {
       method: "POST",
@@ -74,7 +74,6 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
       },
       body: JSON.stringify({
         authorId: serverSesion.id,
-
         time: uploadData.time,
         endTime: uploadData.endTime,
         description: uploadData.description,
