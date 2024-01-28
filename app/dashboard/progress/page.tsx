@@ -38,6 +38,7 @@ export const metadata = {
   
 const Progress = async () => {
     const tasks = await (await prisma.schedule.findMany({})).filter(r => r.completed)
+
     console.log('The task lenght is: ' , tasks)
     return (
         <>
@@ -98,7 +99,7 @@ const Progress = async () => {
                    <LineChart/>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">100+</div>
+                    <div className="text-2xl font-bold">{tasks.length}</div>
                     <p className="text-xs text-muted-foreground">
                       +20.1% from last month
                     </p>
