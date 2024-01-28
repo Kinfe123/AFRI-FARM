@@ -161,7 +161,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
             </Label>
 
             <Input
-              id="time"
+              id="endTime"
               onChange={handleChange}
               value={uploadData.endTime}
               className="col-span-3"
