@@ -1,12 +1,6 @@
-'use client'
+"use client";
 
-
-import {
-
-  CircleIcon,
-
-  StarIcon,
-} from "lucide-react";
+import { CircleIcon, StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import UploadDialog from "../components/upload-dialog";
 
@@ -36,86 +30,112 @@ import { prisma } from "@/lib/db";
 import DownloadPage from "../components/download";
 import { timeAgo } from "@/lib/utils";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { toast } from "@/components/ui/use-toast";
 import ScheduleUpload from "@/components/schedule-dialog";
+import { useState } from "react";
+import { Icons } from "@/components/icons";
 type ScheduleProps = {
-    id: string,
-    authorId: string,
-    time: string,
-    title: string,
-    endTime: string,
-    date: Date,
-    description: string,
-    completed: boolean,
-    createdAt: Date,
-    updatedAt: Date,
-}[]
-const Schedules = ({schedules}: {schedules: ScheduleProps}) =>  {
-  
-    const handleComplete = async (id: any , status:boolean) => {
+  id: string;
+  authorId: string;
+  time: string;
+  title: string;
+  endTime: string;
+  date: Date;
+  description: string;
+  completed: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}[];
+const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
+  const [loading, setLoading] = useState(false);
 
-    
-        const res = await fetch('/api/schedule/' ,{
-          method: 'PATCH',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: id,
-            status: status
-          })
-        })
-    
-       
-      }
-    return (
-         <>
-          {schedules.map((r) => {
-            return (
-              //   <div key={r.id} className="flex flex-col gap-2  items-start rounded-2xl border-[0.112px] border-none h-[300px] bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent">
+  const handleComplete = async (id: any, status: boolean) => {
+    setLoading(true)
+    const res = await fetch("/api/schedule/", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        status: status,
+      }),
+    });
+    if (!res.ok) {
+      return toast({
+        title: "Something went wrong.",
+        description:
+          "We can't process it at this time . Please try again.",
+        variant: "destructive",
+      });
+    } else {
+      //   sendEmail();
+      //   sendAdminEmail();
 
-              //      <div>
+      return toast({
+        title: "Successfully Sent",
+        description: `You have updated your schedules status. `,
+        variant: "default",
+      });
+    }
+  };
+  return (
+    <>
+      {schedules.map((r) => {
+        return (
+          //   <div key={r.id} className="flex flex-col gap-2  items-start rounded-2xl border-[0.112px] border-none h-[300px] bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent">
 
-              //      <h1 className="text-muted-foreground font-sans">Test header</h1>
-              //      <p>Test description goes here for moer clarification</p>
-              //      <div className="flex justify-between items-center">
-              //         <p>7 min ago</p>
-              //         <button>
-              //             download
-              //         </button>
-              //      </div>
-              //      </div>
-              //   </div>
-              <Card
-                key={r.id}
-                className="rounded-3xl relative  bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent"
-              >
-                <CardHeader className="grid grid-cols-[1fr_10px] items-start gap-4 space-y-0 relative">
-                  <div className="space-y-3">
-                    <CardTitle>{r.title}</CardTitle>
+          //      <div>
 
-                    <CardDescription>{r.description}</CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="absolute top-2 right-2">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-                        >
-                          <DotsHorizontalIcon className="h-4 w-4" />
-                          <span className="sr-only">Open menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-[160px]">
-                        <DropdownMenuItem> <div onClick={() => {
-                          handleComplete(r.id , r.completed)
-                        }}>Mark as {r.completed ? 'Uncomplete' : 'Complete'}</div> </DropdownMenuItem> 
-                        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-                        <DropdownMenuItem>Favorite</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        {/* <DropdownMenuSub>
+          //      <h1 className="text-muted-foreground font-sans">Test header</h1>
+          //      <p>Test description goes here for moer clarification</p>
+          //      <div className="flex justify-between items-center">
+          //         <p>7 min ago</p>
+          //         <button>
+          //             download
+          //         </button>
+          //      </div>
+          //      </div>
+          //   </div>
+          <Card
+            key={r.id}
+            className="rounded-3xl relative  bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent"
+          >
+            <CardHeader className="grid grid-cols-[1fr_10px] items-start gap-4 space-y-0 relative">
+              <div className="space-y-3">
+                <CardTitle>{r.title}</CardTitle>
+
+                <CardDescription>{r.description}</CardDescription>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="absolute top-2 right-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="flex h-8 w-10 p-0 data-[state=open]:bg-muted"
+                    >
+                      <DotsHorizontalIcon className="h-4 w-4" />
+                      <span className="sr-only">Open menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-[160px]">
+                    <DropdownMenuItem className="flex gap-2">
+                    {!loading && <Icons.spinner className=" inline mr-2 h-4 w-4 animate-spin" />}
+                      {" "}
+                      <div
+                        onClick={() => {
+                          handleComplete(r.id, r.completed);
+                        }}
+                      >
+                       Mark as {r.completed ? "Uncomplete" : "Complete"}
+                      </div>{" "}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem> Make a copy</DropdownMenuItem>
+                    <DropdownMenuItem>Favorite</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    {/* <DropdownMenuSub>
                           <DropdownMenuSubTrigger>
                             Labels
                           </DropdownMenuSubTrigger>
@@ -132,40 +152,40 @@ const Schedules = ({schedules}: {schedules: ScheduleProps}) =>  {
                             </DropdownMenuRadioGroup>
                           </DropdownMenuSubContent>
                         </DropdownMenuSub> */}
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                          Delete
-                          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                  <div className="flex space-x-4 text-sm text-muted-foreground">
-                    <div className="flex items-center">
-                      <CircleIcon className="mr-1 h-3 w-3 fill-sky-400 text-sky-400" />
-                      {r.time} - {r.endTime} 
-                    </div>
-                    <div className="flex items-center">
-                      <StarIcon className="mr-1 h-3 w-3" />
-                    {timeAgo(r.date)}
-                    </div>
-                    <br />
-                  </div>
-                  <div className="flex mt-2 justify-between text-muted-foreground">
-                    {/* <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground ">
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
+                      Delete
+                      <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+              <div className="flex space-x-4 text-sm text-muted-foreground">
+                <div className="flex items-center">
+                  <CircleIcon className="mr-1 h-3 w-3 fill-sky-400 text-sky-400" />
+                  {r.time} - {r.endTime}
+                </div>
+                <div className="flex items-center">
+                  <StarIcon className="mr-1 h-3 w-3" />
+                  {r.date.toLocaleDateString('en-GB')}
+                </div>
+                <br />
+              </div>
+              <div className="flex mt-2 justify-between text-muted-foreground">
+                {/* <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground ">
                       <DownloadPage url={r.resourceUrl} />
                       <Separator orientation="vertical" className="h-[20px]" />
                     </div> */}
-                    <div className="">
-                      <p>{timeAgo(r.updatedAt)}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-     </>
-    )
-}
+                <div className="">
+                  <p>{timeAgo(r.updatedAt)}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
+    </>
+  );
+};
 
-export default Schedules
+export default Schedules;

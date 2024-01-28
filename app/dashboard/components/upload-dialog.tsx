@@ -93,8 +93,6 @@ function UploadDialog({ serverSesion, jobPosition }: any) {
         grade: values1
       }),
     });
-
-    console.log("The data as a response: ", req);
     setLoading(false);
     if (!req.ok) {
       return toast({
