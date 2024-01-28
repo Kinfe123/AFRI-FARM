@@ -24,7 +24,7 @@ export default async function DashboardPage() {
   return (
     <DashboardShell>
       <h1 className="mx-auto  font-heading text-4xl text-black dark:text-white">
-        Our Dashboard is currently under construction , Stay Tuned{" "}
+        More Features are popping in{" "}
       </h1>
 
       <div></div>
