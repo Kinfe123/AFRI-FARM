@@ -67,7 +67,11 @@ const Resources = ({ resources }: { resources: ResourceProps }) => {
   const handleTypo = (e) => {
     setInputText(e.target.value);
 
-    const filtered = searchResources.filter(res => res.Title?.toLowerCase().includes(inputText.toLowerCase()))
+    if(inputText.trim() === ''){
+        setSearchResouces(resources)
+    }
+
+    const filtered = resources.filter(res => res.Title?.toLowerCase().includes(inputText.toLowerCase()))
     setSearchResouces(filtered)
   };
 
@@ -76,7 +80,7 @@ const Resources = ({ resources }: { resources: ResourceProps }) => {
   // }
   return (
     <div>
-      <div className="flex justify-center items-center mx-auto max-w-6xl">
+      <div className="flex justify-center items-center mx-auto max-w-3xl mb-10">
         <Input
           value={inputText}
           onChange={handleTypo}
