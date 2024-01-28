@@ -199,9 +199,9 @@ const Progress = async () => {
                 </Card>
                 <Card className="col-span-3">
                   <CardHeader>
-                    <CardTitle>Recent Sales</CardTitle>
+                    <CardTitle>Recent Actions</CardTitle>
                     <CardDescription>
-                      You made 265 sales this month.
+                      Recenet Action will be logged here
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
