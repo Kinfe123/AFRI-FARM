@@ -15,9 +15,9 @@ export async function POST(req: Request) {
     if (!body) {
       return new Response("No body provided", { status: 404 });
     }
-    const { title, description, date, authorId, time , endTime } = body;
+    const { title, description, date, authorId, time , endTime , completed } = body;
 
-    console.log('THe date is:')
+    console.log('THe body is:' , body)
 
     const schedule = await prisma.schedule.create({
       data: {
@@ -27,10 +27,12 @@ export async function POST(req: Request) {
         endTime: endTime,
         description: description,
         title: title,
-        completed:false,
+        completed:completed,
 
       },
     }); 
+
+    console.log("tHE SCHIDULED one: " , schedule)
 
 
 
