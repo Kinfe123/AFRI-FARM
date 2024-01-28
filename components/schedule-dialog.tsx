@@ -79,6 +79,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
         description: uploadData.description,
         date: date,
         title: uploadData.title,
+        
       }),
     });
 

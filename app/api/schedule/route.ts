@@ -26,7 +26,8 @@ export async function POST(req: Request) {
         time: time,
         endTime: endTime,
         description: description,
-        title: title
+        title: title,
+        completed:false,
 
       },
     }); 

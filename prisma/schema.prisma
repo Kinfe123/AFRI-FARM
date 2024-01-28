@@ -135,6 +135,7 @@ model Schedule {
   endTime     String
   date        DateTime
   description String
+  completed   Boolean
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")
 }
