@@ -143,15 +143,15 @@ export default async function SchedulePage() {
                     </div>
                     <div className="flex items-center">
                       <StarIcon className="mr-1 h-3 w-3" />
-                      {new Date(r.date)}
+                    {timeAgo(r.date)}
                     </div>
                     <br />
                   </div>
                   <div className="flex mt-2 justify-between text-muted-foreground">
-                    <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground ">
+                    {/* <div className="flex items-center space-x-1 rounded-md bg-transparent text-secondary-foreground ">
                       <DownloadPage url={r.resourceUrl} />
                       <Separator orientation="vertical" className="h-[20px]" />
-                    </div>
+                    </div> */}
                     <div className="">
                       <p>{timeAgo(r.updatedAt)}</p>
                     </div>
