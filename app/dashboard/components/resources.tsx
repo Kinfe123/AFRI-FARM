@@ -64,7 +64,7 @@ type ResourceProps = {
 const Resources = ({ resources }: { resources: ResourceProps }) => {
   const [searchResources, setSearchResouces] = useState(resources);
   const [inputText, setInputText] = useState("");
-  const handleTypo = (e) => {
+  const handleTypo = (e:any) => {
     setInputText(e.target.value);
 
     if(inputText.trim() === ''){
