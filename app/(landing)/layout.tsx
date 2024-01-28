@@ -5,8 +5,11 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Providers from "@/components/Provider";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
+import localFont from "next/font/local";
+import { cn } from "@/lib/utils";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import { siteConfig } from "@/config/site";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +21,11 @@ export const metadata: Metadata = {
     template: `%s -  ${siteConfig.name}`,
   },
 };
+
+const fontHeading = localFont({
+  src:  '../../public/CalSans-SemiBold.ttf',
+  variable: "--font-heading",
+});
 
 
 export default function RootLayout({
@@ -31,7 +39,7 @@ export default function RootLayout({
         <Providers>
           <EdgeStoreProvider>
             <Navbar />
-            <body className={poppins.className}>{children}</body>
+            <body className={cn(poppins.className , fontHeading.variable)}>{children}</body>
           </EdgeStoreProvider>
           <Toaster />
         </Providers>
