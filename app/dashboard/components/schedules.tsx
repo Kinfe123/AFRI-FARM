@@ -73,7 +73,7 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
       //   sendAdminEmail();
 
       return toast({
-        title: "Successfully Sent",
+        title: "Successfully Updated",
         description: `You have updated your schedules status. `,
         variant: "default",
       });
@@ -122,7 +122,7 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-[160px]">
                     <DropdownMenuItem className="flex gap-2">
-                    {!loading && <Icons.spinner className=" inline mr-2 h-4 w-4 animate-spin" />}
+                    {loading && <Icons.spinner className=" inline mr-2 h-4 w-4 animate-spin" />}
                       {" "}
                       <div
                         onClick={() => {
