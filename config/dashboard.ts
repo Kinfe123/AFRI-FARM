@@ -28,6 +28,11 @@ export const dashboardConfig: any = {
       href: "/dashboard/schedule",
       icon: "billing",
     },
+    {
+      title: "Progress",
+      href: "/dashboard/progress",
+      icon: "billing",
+    },
   ],
 }
 
