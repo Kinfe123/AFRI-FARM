@@ -132,6 +132,7 @@ model Schedule {
   authorId    String
   time        String
   title       String
+  endTime     String
   date        DateTime
   description String
   createdAt   DateTime @default(now()) @map(name: "created_at")

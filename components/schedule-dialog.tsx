@@ -51,6 +51,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
   const [uploadData, setUploadData] = useState({
     date: "",
     time: "",
+    endTime: "",
     title: "",
     description: "",
   });
@@ -75,7 +76,7 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
         authorId: serverSesion.id,
 
         time: uploadData.time,
-
+        endTime: uploadData.endTime,
         description: uploadData.description,
         date: date,
         title: uploadData.title,
@@ -150,6 +151,19 @@ function ScheduleUpload({ serverSesion, jobPosition }: any) {
               id="time"
               onChange={handleChange}
               value={uploadData.time}
+              className="col-span-3"
+              placeholder="HH:MM"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              End Time
+            </Label>
+
+            <Input
+              id="time"
+              onChange={handleChange}
+              value={uploadData.endTime}
               className="col-span-3"
               placeholder="HH:MM"
             />
