@@ -3,19 +3,6 @@ import * as z from "zod";
 
 import { prisma } from "@/lib/db";
 import { receiveMessageOnPort } from "worker_threads";
-
-const resumeCreateSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
-  email: z.string(),
-  resumeLink: z.string(),
-  portfolioLink: z.string(),
-  jobType: z.string(),
-  jobId: z.number(),
-  referredFrom: z.string(),
-  resumeUrl: z.string(),
-});
-
 export async function POST(req: Request) {
   try {
     // if(!session) {
