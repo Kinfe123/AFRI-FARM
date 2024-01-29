@@ -30,6 +30,7 @@ import {
     Timer,
     LineChart,
     Brain,
+    BarChart,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -114,6 +115,7 @@ export const Icons = {
     add: Plus,
     warning: AlertTriangle,
     user: User,
+    rate: BarChart,
     arrowRight: ArrowRight,
     help: HelpCircle,
     pizza: Pizza,
