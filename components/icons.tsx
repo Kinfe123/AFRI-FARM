@@ -29,6 +29,7 @@ import {
     X,
     Timer,
     LineChart,
+    Brain,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -121,6 +122,7 @@ export const Icons = {
     chart: LineChart,
     moon: Moon,
     layout: Layout,
+    ai: Brain,
     laptop: Laptop,
     key: KeyIcon,
     htmlLogo: () => (

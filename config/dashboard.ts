@@ -38,6 +38,11 @@ export const dashboardConfig: any = {
       href: "/dashboard/account",
       icon: "user",
     },
+    {
+      title: "AI Insights",
+      href: "/dashboard/ai-insights",
+      icon: "ai",
+    },
   ],
 }
 
