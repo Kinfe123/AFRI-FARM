@@ -27,6 +27,7 @@ import {
     User,
     Users,
     X,
+    Timer,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -115,6 +116,7 @@ export const Icons = {
     help: HelpCircle,
     pizza: Pizza,
     sun: SunMedium,
+    timer: Timer,
     moon: Moon,
     layout: Layout,
     laptop: Laptop,

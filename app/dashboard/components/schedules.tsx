@@ -48,6 +48,19 @@ type ScheduleProps = {
 }[];
 const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
   const [loading, setLoading] = useState(false);
+  const handleDelete = async (id: any) => {
+    const res = await fetch('/api/schedule/' , {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: id
+        })
+
+    })
+
+  }
 
   const handleComplete = async (id: any, status: boolean) => {
     setLoading(true)
@@ -153,7 +166,9 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
                           </DropdownMenuSubContent>
                         </DropdownMenuSub> */}
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => {
+                        handleDelete(r.id)
+                    }}>
                       Delete
                       <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
                     </DropdownMenuItem>

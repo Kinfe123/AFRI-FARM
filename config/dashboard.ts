@@ -26,7 +26,7 @@ export const dashboardConfig: any = {
     {
       title: "Schedule",
       href: "/dashboard/schedule",
-      icon: "billing",
+      icon: "timer",
     },
     {
       title: "Progress",

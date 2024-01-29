@@ -65,3 +65,23 @@ export async function PATCH(req: Request) {
     });
   }
 }
+
+
+export async function DELETE(req: Request) {
+  try {
+    const res = await req.json()
+    const {id} = res
+    const deleteSchedule = await prisma.schedule.delete({
+      where: {
+        id: id
+      }
+    })
+    console.log("THe data has been deleted: " , deleteSchedule)
+    
+
+    return new Response(JSON.stringify(deleteSchedule))
+
+  }catch(e){
+    console.log('Error has occured!')
+  }
+}
