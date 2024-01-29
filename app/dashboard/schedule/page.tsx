@@ -25,7 +25,13 @@ export const metadata = {
 
 export default async function SchedulePage() {
   const user = await getUser();
-  const schedules = await prisma.schedule.findMany({});
+ 
+  const schedules = await prisma.schedule.findMany({
+    where: {
+      authorId: user?.id
+    }
+  });
+
 
   return (
     <DashboardShell>

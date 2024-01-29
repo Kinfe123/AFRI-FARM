@@ -28,6 +28,7 @@ import {
     Users,
     X,
     Timer,
+    LineChart,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -117,6 +118,7 @@ export const Icons = {
     pizza: Pizza,
     sun: SunMedium,
     timer: Timer,
+    chart: LineChart,
     moon: Moon,
     layout: Layout,
     laptop: Laptop,

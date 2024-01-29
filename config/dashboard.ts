@@ -31,7 +31,7 @@ export const dashboardConfig: any = {
     {
       title: "Progress",
       href: "/dashboard/progress",
-      icon: "billing",
+      icon: "chart",
     },
     {
       title: "Manage User Account",
