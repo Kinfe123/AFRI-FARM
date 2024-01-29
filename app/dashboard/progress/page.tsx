@@ -169,17 +169,7 @@ const Progress = async () => {
                     <Overview />
                   </CardContent>
                 </Card>
-                {/* <Card className="col-span-3">
-                  <CardHeader>
-                    <CardTitle>Recent Actions</CardTitle>
-                    <CardDescription>
-                      Recenet Action will be logged here
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                   
-                  </CardContent>
-                </Card> */}
+            
               </div>
             </TabsContent>
           </Tabs>
