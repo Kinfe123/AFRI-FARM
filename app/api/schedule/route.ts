@@ -69,8 +69,10 @@ export async function PATCH(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
+
     const res = await req.json()
     const {id} = res
+    console.log('TH id called with delte: ' , id)
     const deleteSchedule = await prisma.schedule.delete({
       where: {
         id: id

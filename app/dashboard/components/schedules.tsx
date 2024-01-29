@@ -32,7 +32,7 @@ import { timeAgo } from "@/lib/utils";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { toast } from "@/components/ui/use-toast";
 import ScheduleUpload from "@/components/schedule-dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "@/components/icons";
 type ScheduleProps = {
   id: string;
@@ -48,22 +48,48 @@ type ScheduleProps = {
 }[];
 const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
   const [loading, setLoading] = useState(false);
-  const handleDelete = async (id: any) => {
-    const res = await fetch('/api/schedule/' , {
-        method: 'DELETE',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            id: id
-        })
+  const [loadingDelelte, setLoadingDelete] = useState(false);
 
-    })
-
+  if (loadingDelelte) {
+     toast({
+      title: "Loading....",
+      description:
+        "Deleting the schedule....",
+      variant: "default",
+    });
   }
 
+  const handleDelete = async (id: any) => {
+    setLoadingDelete(true);
+    const res = await fetch("/api/schedule/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+    if (!res.ok) {
+      return toast({
+        title: "Something went wrong.",
+        description: "We can't process it at this time . Please try again.",
+        variant: "destructive",
+      });
+    } else {
+      //   sendEmail();
+      //   sendAdminEmail();
+
+      return toast({
+        title: "Successfully Updated",
+        description: `You have updated your schedules status. `,
+        variant: "default",
+      });
+    }
+  };
+
   const handleComplete = async (id: any, status: boolean) => {
-    setLoading(true)
+    setLoading(true);
     const res = await fetch("/api/schedule/", {
       method: "PATCH",
       headers: {
@@ -77,8 +103,7 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
     if (!res.ok) {
       return toast({
         title: "Something went wrong.",
-        description:
-          "We can't process it at this time . Please try again.",
+        description: "We can't process it at this time . Please try again.",
         variant: "destructive",
       });
     } else {
@@ -96,20 +121,6 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
     <>
       {schedules.map((r) => {
         return (
-          //   <div key={r.id} className="flex flex-col gap-2  items-start rounded-2xl border-[0.112px] border-none h-[300px] bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent">
-
-          //      <div>
-
-          //      <h1 className="text-muted-foreground font-sans">Test header</h1>
-          //      <p>Test description goes here for moer clarification</p>
-          //      <div className="flex justify-between items-center">
-          //         <p>7 min ago</p>
-          //         <button>
-          //             download
-          //         </button>
-          //      </div>
-          //      </div>
-          //   </div>
           <Card
             key={r.id}
             className="rounded-3xl relative  bg-gradient-to-tr from-purple-400/10 via-transparent to-transparent"
@@ -135,14 +146,15 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-[160px]">
                     <DropdownMenuItem className="flex gap-2">
-                    {loading && <Icons.spinner className=" inline mr-2 h-4 w-4 animate-spin" />}
-                      {" "}
+                      {loading && (
+                        <Icons.spinner className=" inline mr-2 h-4 w-4 animate-spin" />
+                      )}{" "}
                       <div
                         onClick={() => {
                           handleComplete(r.id, r.completed);
                         }}
                       >
-                       Mark as {r.completed ? "Uncomplete" : "Complete"}
+                        Mark as {r.completed ? "Uncomplete" : "Complete"}
                       </div>{" "}
                     </DropdownMenuItem>
                     <DropdownMenuItem> Make a copy</DropdownMenuItem>
@@ -166,9 +178,11 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
                           </DropdownMenuSubContent>
                         </DropdownMenuSub> */}
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => {
-                        handleDelete(r.id)
-                    }}>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        handleDelete(r.id);
+                      }}
+                    >
                       Delete
                       <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
                     </DropdownMenuItem>
@@ -182,7 +196,7 @@ const Schedules = ({ schedules }: { schedules: ScheduleProps }) => {
                 </div>
                 <div className="flex items-center">
                   <StarIcon className="mr-1 h-3 w-3" />
-                  {r.date.toLocaleDateString('en-GB')}
+                  {r.date.toLocaleDateString("en-GB")}
                 </div>
                 <br />
               </div>
